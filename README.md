@@ -5,7 +5,7 @@ test
 ----
 ```php
 
-$output = murmurhashint64a("foo",0x1234ABCD);
+$output = murmurhashint64a("foo",0x12345678);
 
 echo $output;
 echo "\n";
