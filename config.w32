@@ -1,0 +1,13 @@
+// $Id$
+// vim:ft=javascript
+
+// If your extension references something external, use ARG_WITH
+// ARG_WITH("murmurhash", "for murmurhash support", "no");
+
+// Otherwise, use ARG_ENABLE
+// ARG_ENABLE("murmurhash", "enable murmurhash support", "no");
+
+if (PHP_MURMURHASH != "no") {
+	EXTENSION("murmurhash", "murmurhash.c");
+}
+
