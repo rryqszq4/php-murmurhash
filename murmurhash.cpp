@@ -40,26 +40,32 @@ ZEND_DECLARE_MODULE_GLOBALS(murmurhash)
 /* True global resources - no need for thread safety here */
 static int le_murmurhash;
 
+ZEND_BEGIN_ARG_INFO_EX(arginfo_murmurhash2, 0, 0, 2)
+    ZEND_ARG_INFO(0, key)
+    ZEND_ARG_INFO(0, seed)
+ZEND_END_ARG_INFO()
 ZEND_BEGIN_ARG_INFO_EX(arginfo_murmurhash64a, 0, 0, 2)
     ZEND_ARG_INFO(0, key)
     ZEND_ARG_INFO(0, seed)
 ZEND_END_ARG_INFO()
-ZEND_BEGIN_ARG_INFO_EX(arginfo_murmurhashint64a, 0, 0, 2)
+ZEND_BEGIN_ARG_INFO_EX(arginfo_murmurhash64b, 0, 0, 2)
     ZEND_ARG_INFO(0, key)
     ZEND_ARG_INFO(0, seed)
 ZEND_END_ARG_INFO()
 
+PHP_FUNCTION(murmurhash2);
 PHP_FUNCTION(murmurhash64a);
-PHP_FUNCTION(murmurhashint64a);
+PHP_FUNCTION(murmurhash64b);
 
 /* {{{ murmurhash_functions[]
  *
  * Every user visible function must have an entry in murmurhash_functions[].
  */
 const zend_function_entry murmurhash_functions[] = {
-	PHP_FE(confirm_murmurhash_compiled,	NULL)		/* For testing, remove later. */
+	//PHP_FE(confirm_murmurhash_compiled,	NULL)		/* For testing, remove later. */
+    PHP_FE(murmurhash2, arginfo_murmurhash2)
     PHP_FE(murmurhash64a, arginfo_murmurhash64a)
-    PHP_FE(murmurhashint64a, arginfo_murmurhashint64a)
+    PHP_FE(murmurhash64b, arginfo_murmurhash64b)
 	PHP_FE_END	/* Must be the last line in murmurhash_functions[] */
 };
 /* }}} */
@@ -171,7 +177,7 @@ PHP_MINFO_FUNCTION(murmurhash)
 /* Every user-visible function in PHP should document itself in the source */
 /* {{{ proto string confirm_murmurhash_compiled(string arg)
    Return a string to confirm that the module is compiled in */
-PHP_FUNCTION(confirm_murmurhash_compiled)
+/*PHP_FUNCTION(confirm_murmurhash_compiled)
 {
 	char *arg = NULL;
 	int arg_len, len;
@@ -183,7 +189,7 @@ PHP_FUNCTION(confirm_murmurhash_compiled)
     php_printf("%s, %d\n", arg, arg_len);
 	len = spprintf(&strg, 0, "Congratulations! You have successfully modified ext/%.78s/config.m4. Module %.78s is now compiled into PHP.", "murmurhash", arg);
 	RETURN_STRINGL(strg, len, 0);
-}
+}*/
 /* }}} */
 /* The previous line is meant for vim and emacs, so it can correctly fold and 
    unfold functions in source code. See the corresponding marks just before 
@@ -191,9 +197,26 @@ PHP_FUNCTION(confirm_murmurhash_compiled)
    follow this convention for the convenience of others editing your code.
 */
 
+PHP_FUNCTION(murmurhash2)
+{
+    char *key = NULL;
+    int key_len;
+    long seed = 0;
+    uint32_t output;
+
+    if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|l", &key, &key_len, &seed) == FAILURE) {
+        RETURN_NULL();
+    }
+
+    output = MurmurHash2(key, key_len, seed);
+    //printf("%s, %d, %d, %lu\n", key, key_len, seed, (uint32_t)output);
+
+    RETURN_LONG(output); 
+}
+
 PHP_FUNCTION(murmurhash64a)
 {
-   char *key = NULL;
+    char *key = NULL;
     int key_len;
     long seed = 0;
     uint64_t output;
@@ -208,22 +231,21 @@ PHP_FUNCTION(murmurhash64a)
     RETURN_LONG(output); 
 }
 
-PHP_FUNCTION(murmurhashint64a)
+PHP_FUNCTION(murmurhash64b)
 {
-    char *key = NULL;
+   char *key = NULL;
     int key_len;
     long seed = 0;
-    int64_t output;
+    uint64_t output;
 
     if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|l", &key, &key_len, &seed) == FAILURE) {
         RETURN_NULL();
     }
 
-    output = MurmurHashInt64A(key, key_len, seed);
-    //printf("%s, %d, %d, %lld\n", key, key_len, seed, (int64_t)output);
+    output = MurmurHash64B(key, key_len, seed);
+    //printf("%s, %d, %d, %llu\n", key, key_len, seed, (uint64_t)output);
 
-    RETURN_LONG(output);
-
+    RETURN_LONG(output); 
 }
 
 /*
