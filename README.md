@@ -2,20 +2,27 @@ php-murmurhash
 ==============
 MurmurHash function for PHP.
 
-test
+Install
+```sh
+$ /path/to/phpize
+$ ./configure --with-php-config=/path/to/php-config
+$ make && make install
+```
+
+Test
 ----
 ```php
 <?php
 
-$output = murmurhash2("foo", 0x1234ABCD);
+$output = murmurhash2("foo", 0x12345678);
 echo $output."\n";
 var_dump($output);
 
-$output = murmurhash64a("foo", 0x1234ABCD);
+$output = murmurhash64a("foo", 0x12345678);
 echo $output."\n";
 var_dump($output);
 
-$output = murmurhash64b("foo", 0x1234ABCD);
+$output = murmurhash64b("foo", 0x12345678);
 echo $output."\n";
 var_dump($output);
 
