@@ -1,8 +1,9 @@
 php-murmurhash
 ==============
-MurmurHash function for PHP.
+MurmurHash function for PHP extension.
 
 Install
+-------
 ```sh
 $ /path/to/phpize
 $ ./configure --with-php-config=/path/to/php-config
