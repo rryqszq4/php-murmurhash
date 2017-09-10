@@ -31,7 +31,9 @@ extern "C" {
 #include "php_murmurhash.h"
 }
 
+#include "MurmurHash1.h"
 #include "MurmurHash2.h"
+#include "MurmurHash3.h"
 
 /* If you declare any globals in php_murmurhash.h uncomment this:
 ZEND_DECLARE_MODULE_GLOBALS(murmurhash)

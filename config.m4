@@ -62,8 +62,10 @@ if test "$PHP_MURMURHASH" != "no"; then
   PHP_REQUIRE_CXX()
   PHP_SUBST(MURMURHASH_SHARED_LIBADD)
   PHP_ADD_LIBRARY(stdc++, 1, MURMUR_HASH_SHARED_LIBADD)
-  MURMURHASH_SOURCES="\ 
+  MURMURHASH_SOURCES="\
+    MurmurHash3.cpp \ 
     MurmurHash2.cpp \
+    MurmurHash1.cpp \
     murmurhash.cpp"
 
   PHP_NEW_EXTENSION(murmurhash, $MURMURHASH_SOURCES, $ext_shared)
