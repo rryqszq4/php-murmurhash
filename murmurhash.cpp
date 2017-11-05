@@ -42,6 +42,10 @@ ZEND_DECLARE_MODULE_GLOBALS(murmurhash)
 /* True global resources - no need for thread safety here */
 static int le_murmurhash;
 
+ZEND_BEGIN_ARG_INFO_EX(arginfo_murmurhash1, 0, 0, 2)
+    ZEND_ARG_INFO(0, key)
+    ZEND_ARG_INFO(0, seed)
+ZEND_END_ARG_INFO()
 ZEND_BEGIN_ARG_INFO_EX(arginfo_murmurhash2, 0, 0, 2)
     ZEND_ARG_INFO(0, key)
     ZEND_ARG_INFO(0, seed)
@@ -55,16 +59,13 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_murmurhash64b, 0, 0, 2)
     ZEND_ARG_INFO(0, seed)
 ZEND_END_ARG_INFO()
 
-PHP_FUNCTION(murmurhash2);
-PHP_FUNCTION(murmurhash64a);
-PHP_FUNCTION(murmurhash64b);
-
 /* {{{ murmurhash_functions[]
  *
  * Every user visible function must have an entry in murmurhash_functions[].
  */
 const zend_function_entry murmurhash_functions[] = {
 	//PHP_FE(confirm_murmurhash_compiled,	NULL)		/* For testing, remove later. */
+    PHP_FE(murmurhash1, arginfo_murmurhash1)
     PHP_FE(murmurhash2, arginfo_murmurhash2)
     PHP_FE(murmurhash64a, arginfo_murmurhash64a)
     PHP_FE(murmurhash64b, arginfo_murmurhash64b)
@@ -198,6 +199,23 @@ PHP_MINFO_FUNCTION(murmurhash)
    function definition, where the functions purpose is also documented. Please 
    follow this convention for the convenience of others editing your code.
 */
+
+PHP_FUNCTION(murmurhash1)
+{
+    char *key = NULL;
+    int key_len;
+    long seed = 0;
+    uint32_t output;
+
+    if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|l", &key, &key_len, &seed) == FAILURE) {
+        RETURN_NULL();
+    }
+
+    output = MurmurHash1(key, key_len, seed);
+    //printf("%s, %d, %d, %lu\n", key, key_len, seed, (uint32_t)output);
+
+    RETURN_LONG(output); 
+}
 
 PHP_FUNCTION(murmurhash2)
 {

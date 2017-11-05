@@ -48,6 +48,11 @@ PHP_MINFO_FUNCTION(murmurhash);
 
 PHP_FUNCTION(confirm_murmurhash_compiled);	/* For testing, remove later. */
 
+PHP_FUNCTION(murmurhash1);
+PHP_FUNCTION(murmurhash2);
+PHP_FUNCTION(murmurhash64a);
+PHP_FUNCTION(murmurhash64b);
+
 /* 
   	Declare any global variables you may need between the BEGIN
 	and END macros here:     
