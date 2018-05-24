@@ -58,7 +58,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_murmurhash64b, 0, 0, 2)
     ZEND_ARG_INFO(0, key)
     ZEND_ARG_INFO(0, seed)
 ZEND_END_ARG_INFO()
-ZEND_BEGIN_ARG_INFO_EX(arginfo_murmurhash3, 0, 0, 2)
+ZEND_BEGIN_ARG_INFO_EX(arginfo_murmurhash3_x86_32, 0, 0, 2)
     ZEND_ARG_INFO(0, key)
     ZEND_ARG_INFO(0, seed)
 ZEND_END_ARG_INFO()
@@ -73,7 +73,7 @@ const zend_function_entry murmurhash_functions[] = {
     PHP_FE(murmurhash2, arginfo_murmurhash2)
     PHP_FE(murmurhash64a, arginfo_murmurhash64a)
     PHP_FE(murmurhash64b, arginfo_murmurhash64b)
-    PHP_FE(murmurhash3, arginfo_murmurhash3)
+    PHP_FE(murmurhash3_x86_32, arginfo_murmurhash3_x86_32)
     PHP_FE_END	/* Must be the last line in murmurhash_functions[] */
 };
 /* }}} */
@@ -273,7 +273,7 @@ PHP_FUNCTION(murmurhash64b)
     RETURN_LONG(output); 
 }
 
-PHP_FUNCTION(murmurhash3)
+PHP_FUNCTION(murmurhash3_x86_32)
 {
     char *key = NULL;
     int key_len;
