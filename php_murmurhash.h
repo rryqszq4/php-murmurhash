@@ -52,6 +52,7 @@ PHP_FUNCTION(murmurhash1);
 PHP_FUNCTION(murmurhash2);
 PHP_FUNCTION(murmurhash64a);
 PHP_FUNCTION(murmurhash64b);
+PHP_FUNCTION(murmurhash3);
 
 /* 
   	Declare any global variables you may need between the BEGIN
