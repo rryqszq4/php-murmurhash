@@ -62,6 +62,14 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_murmurhash3_x86_32, 0, 0, 2)
     ZEND_ARG_INFO(0, key)
     ZEND_ARG_INFO(0, seed)
 ZEND_END_ARG_INFO()
+ZEND_BEGIN_ARG_INFO_EX(arginfo_murmurhash3_x86_128, 0, 0, 2)
+    ZEND_ARG_INFO(0, key)
+    ZEND_ARG_INFO(0, seed)
+ZEND_END_ARG_INFO()
+ZEND_BEGIN_ARG_INFO_EX(arginfo_murmurhash3_x64_128, 0, 0, 2)
+    ZEND_ARG_INFO(0, key)
+    ZEND_ARG_INFO(0, seed)
+ZEND_END_ARG_INFO()
 
 /* {{{ murmurhash_functions[]
  *
@@ -74,6 +82,8 @@ const zend_function_entry murmurhash_functions[] = {
     PHP_FE(murmurhash64a, arginfo_murmurhash64a)
     PHP_FE(murmurhash64b, arginfo_murmurhash64b)
     PHP_FE(murmurhash3_x86_32, arginfo_murmurhash3_x86_32)
+    PHP_FE(murmurhash3_x86_128, arginfo_murmurhash3_x86_128)
+    PHP_FE(murmurhash3_x64_128, arginfo_murmurhash3_x64_128)
     PHP_FE_END	/* Must be the last line in murmurhash_functions[] */
 };
 /* }}} */
@@ -288,6 +298,38 @@ PHP_FUNCTION(murmurhash3_x86_32)
     //printf("%s, %d, %d, %lu\n", key, key_len, seed, output);
 
     RETURN_LONG(output);
+}
+
+PHP_FUNCTION(murmurhash3_x86_128)
+{
+    char *key = NULL;
+    int key_len;
+    long seed = 0;
+    char output[16];
+
+    if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|l", &key, &key_len, &seed) == FAILURE) {
+        RETURN_NULL();
+    }
+
+    MurmurHash3_x86_128(key, key_len, seed, &output);
+
+    RETURN_STRINGL(output, 16, 1);
+}
+
+PHP_FUNCTION(murmurhash3_x64_128)
+{
+    char *key = NULL;
+    int key_len;
+    long seed = 0;
+    char output[16];
+
+    if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|l", &key, &key_len, &seed) == FAILURE) {
+        RETURN_NULL();
+    }
+
+    MurmurHash3_x64_128(key, key_len, seed, &output);
+
+    RETURN_STRINGL(output, 16, 1);
 }
 
 /*
