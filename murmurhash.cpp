@@ -313,7 +313,11 @@ PHP_FUNCTION(murmurhash3_x86_128)
 
     MurmurHash3_x86_128(key, key_len, seed, &output);
 
+#if PHP_MAJOR_VERSION > 7 || PHP_MAJOR_VERSION == 7
+    RETURN_STRINGL(output, 16);
+#else
     RETURN_STRINGL(output, 16, 1);
+#endif
 }
 
 PHP_FUNCTION(murmurhash3_x64_128)
@@ -329,7 +333,11 @@ PHP_FUNCTION(murmurhash3_x64_128)
 
     MurmurHash3_x64_128(key, key_len, seed, &output);
 
+#if PHP_MAJOR_VERSION > 7 || PHP_MAJOR_VERSION == 7
+    RETURN_STRINGL(output, 16);
+#else
     RETURN_STRINGL(output, 16, 1);
+#endif
 }
 
 /*
