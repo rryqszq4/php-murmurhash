@@ -1,6 +1,7 @@
 php-murmurhash
 ==============
 MurmurHash function for PHP extension.
+
 [![Build Status](https://travis-ci.org/rryqszq4/php-murmurhash.svg?branch=master)](https://travis-ci.org/rryqszq4/php-murmurhash)
 
 Requirement
@@ -82,8 +83,8 @@ TIME START 2018-05-27 02:33:16
 =====================================================================
 PASS Check for murmurhash presence [tests/001.phpt] 
 PASS Testing function murmurhash1 [tests/002-murmurhash1.phpt] 
-PASS Testing function murmurhash1 [tests/003-murmurhash2.phpt] 
-PASS Testing function murmurhash1 [tests/004-murmurhash3.phpt] 
+PASS Testing function murmurhash2 [tests/003-murmurhash2.phpt] 
+PASS Testing function murmurhash3 [tests/004-murmurhash3.phpt] 
 =====================================================================
 TIME END 2018-05-27 02:33:17
 =====================================================================

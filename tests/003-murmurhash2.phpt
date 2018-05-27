@@ -1,5 +1,5 @@
 --TEST--
-Testing function murmurhash1
+Testing function murmurhash2
 --SKIPIF--
 <?php if (!extension_loaded("murmurhash")) print "skip"; ?>
 --FILE--
