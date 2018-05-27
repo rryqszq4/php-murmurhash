@@ -1,8 +1,8 @@
 php-murmurhash
 ==============
-MurmurHash function for PHP extension.
-
 [![Build Status](https://travis-ci.org/rryqszq4/php-murmurhash.svg?branch=master)](https://travis-ci.org/rryqszq4/php-murmurhash)
+
+MurmurHash function for PHP extension.
 
 Requirement
 -----------
@@ -106,8 +106,7 @@ Time taken      :    1 seconds
 
 Copyright and License
 ---------------------
-BSD 2-Clause License
-
+```
 Copyright (c) 2017-2018, Quan Zhao
 All rights reserved.
 
