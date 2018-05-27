@@ -218,7 +218,7 @@ PHP_MINFO_FUNCTION(murmurhash)
 PHP_FUNCTION(murmurhash1)
 {
     char *key = NULL;
-    int key_len;
+    size_t key_len = 0;
     long seed = 0;
     uint32_t output;
 
@@ -235,7 +235,7 @@ PHP_FUNCTION(murmurhash1)
 PHP_FUNCTION(murmurhash2)
 {
     char *key = NULL;
-    int key_len;
+    size_t key_len = 0;
     long seed = 0;
     uint32_t output;
 
@@ -252,7 +252,7 @@ PHP_FUNCTION(murmurhash2)
 PHP_FUNCTION(murmurhash64a)
 {
     char *key = NULL;
-    int key_len;
+    size_t key_len = 0;
     long seed = 0;
     uint64_t output;
 
@@ -269,7 +269,7 @@ PHP_FUNCTION(murmurhash64a)
 PHP_FUNCTION(murmurhash64b)
 {
     char *key = NULL;
-    int key_len;
+    size_t key_len = 0;
     long seed = 0;
     uint64_t output;
 
@@ -286,7 +286,7 @@ PHP_FUNCTION(murmurhash64b)
 PHP_FUNCTION(murmurhash3_x86_32)
 {
     char *key = NULL;
-    int key_len;
+    size_t key_len = 0;
     long seed = 0;
     uint32_t output;
 
@@ -303,7 +303,7 @@ PHP_FUNCTION(murmurhash3_x86_32)
 PHP_FUNCTION(murmurhash3_x86_128)
 {
     char *key = NULL;
-    int key_len;
+    size_t key_len = 0;
     long seed = 0;
     char output[16];
 
@@ -323,7 +323,7 @@ PHP_FUNCTION(murmurhash3_x86_128)
 PHP_FUNCTION(murmurhash3_x64_128)
 {
     char *key = NULL;
-    int key_len;
+    size_t key_len = 0;
     long seed = 0;
     char output[16];
 
