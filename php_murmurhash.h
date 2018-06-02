@@ -49,9 +49,13 @@ PHP_MINFO_FUNCTION(murmurhash);
 PHP_FUNCTION(confirm_murmurhash_compiled);	/* For testing, remove later. */
 
 PHP_FUNCTION(murmurhash1);
+PHP_FUNCTION(murmurhash1_aligned);
 PHP_FUNCTION(murmurhash2);
 PHP_FUNCTION(murmurhash64a);
 PHP_FUNCTION(murmurhash64b);
+PHP_FUNCTION(murmurhash2a);
+PHP_FUNCTION(murmurhash_neutral2);
+PHP_FUNCTION(murmurhash_aligned2);
 PHP_FUNCTION(murmurhash3_x86_32);
 PHP_FUNCTION(murmurhash3_x86_128);
 PHP_FUNCTION(murmurhash3_x64_128);
