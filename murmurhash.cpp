@@ -98,6 +98,7 @@ const zend_function_entry murmurhash_functions[] = {
     PHP_FE(murmurhash2, arginfo_murmurhash2)
     PHP_FE(murmurhash64a, arginfo_murmurhash64a)
     PHP_FE(murmurhash64b, arginfo_murmurhash64b)
+    PHP_FE(murmurhash2a, arginfo_murmurhash2a)
     PHP_FE(murmurhash3_x86_32, arginfo_murmurhash3_x86_32)
     PHP_FE(murmurhash3_x86_128, arginfo_murmurhash3_x86_128)
     PHP_FE(murmurhash3_x64_128, arginfo_murmurhash3_x64_128)
@@ -316,6 +317,23 @@ PHP_FUNCTION(murmurhash64b)
     //printf("%s, %d, %d, %llu\n", key, key_len, seed, (uint64_t)output);
 
     RETURN_LONG(output); 
+}
+
+PHP_FUNCTION(murmurhash2a)
+{
+    char *key = NULL;
+    size_t key_len = 0;
+    long seed = 0;
+    uint64_t output;
+
+    if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|l", &key, &key_len, &seed) == FAILURE) {
+        RETURN_NULL();
+    }
+
+    output = MurmurHash2A(key, key_len, seed);
+    //printf("%s, %d, %d, %llu\n", key, key_len, seed, (uint64_t)output);
+
+    RETURN_LONG(output);
 }
 
 PHP_FUNCTION(murmurhash3_x86_32)
