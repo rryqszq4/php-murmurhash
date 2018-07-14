@@ -46,6 +46,10 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_murmurhash1, 0, 0, 2)
     ZEND_ARG_INFO(0, key)
     ZEND_ARG_INFO(0, seed)
 ZEND_END_ARG_INFO()
+ZEND_BEGIN_ARG_INFO_EX(arginfo_murmurhash1_aligned, 0, 0, 2)
+    ZEND_ARG_INFO(0, key)
+    ZEND_ARG_INFO(0, seed)
+ZEND_END_ARG_INFO()
 ZEND_BEGIN_ARG_INFO_EX(arginfo_murmurhash2, 0, 0, 2)
     ZEND_ARG_INFO(0, key)
     ZEND_ARG_INFO(0, seed)
@@ -55,6 +59,18 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_murmurhash64a, 0, 0, 2)
     ZEND_ARG_INFO(0, seed)
 ZEND_END_ARG_INFO()
 ZEND_BEGIN_ARG_INFO_EX(arginfo_murmurhash64b, 0, 0, 2)
+    ZEND_ARG_INFO(0, key)
+    ZEND_ARG_INFO(0, seed)
+ZEND_END_ARG_INFO()
+ZEND_BEGIN_ARG_INFO_EX(arginfo_murmurhash2a, 0, 0, 2)
+    ZEND_ARG_INFO(0, key)
+    ZEND_ARG_INFO(0, seed)
+ZEND_END_ARG_INFO()
+ZEND_BEGIN_ARG_INFO_EX(arginfo_murmurhash_neutral2, 0, 0, 2)
+    ZEND_ARG_INFO(0, key)
+    ZEND_ARG_INFO(0, seed)
+ZEND_END_ARG_INFO()
+ZEND_BEGIN_ARG_INFO_EX(arginfo_murmurhash_aligned2, 0, 0, 2)
     ZEND_ARG_INFO(0, key)
     ZEND_ARG_INFO(0, seed)
 ZEND_END_ARG_INFO()
@@ -78,6 +94,7 @@ ZEND_END_ARG_INFO()
 const zend_function_entry murmurhash_functions[] = {
     //PHP_FE(confirm_murmurhash_compiled,	NULL)		/* For testing, remove later. */
     PHP_FE(murmurhash1, arginfo_murmurhash1)
+    PHP_FE(murmurhash1_aligned, arginfo_murmurhash1_aligned)
     PHP_FE(murmurhash2, arginfo_murmurhash2)
     PHP_FE(murmurhash64a, arginfo_murmurhash64a)
     PHP_FE(murmurhash64b, arginfo_murmurhash64b)
@@ -230,6 +247,24 @@ PHP_FUNCTION(murmurhash1)
     //printf("%s, %d, %d, %lu\n", key, key_len, seed, (uint32_t)output);
 
     RETURN_LONG(output); 
+}
+
+PHP_FUNCTION(murmurhash1_aligned)
+{
+    char *key = NULL;
+    size_t key_len = 0;
+    long seed = 0;
+    uint32_t output;
+
+    if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|l", &key, &key_len, &seed) == FAILURE) {
+        RETURN_NULL();
+    }
+
+    output = MurmurHash1Aligned(key, key_len, seed);
+    //printf("%s, %d, %d, %lu\n", key, key_len, seed, (uint32_t)output);
+
+    RETURN_LONG(output); 
+
 }
 
 PHP_FUNCTION(murmurhash2)
