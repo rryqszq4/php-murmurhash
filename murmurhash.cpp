@@ -100,6 +100,7 @@ const zend_function_entry murmurhash_functions[] = {
     PHP_FE(murmurhash64b, arginfo_murmurhash64b)
     PHP_FE(murmurhash2a, arginfo_murmurhash2a)
     PHP_FE(murmurhash_neutral2, arginfo_murmurhash_neutral2)
+    PHP_FE(murmurhash_aligned2, arginfo_murmurhash_aligned2)
     PHP_FE(murmurhash3_x86_32, arginfo_murmurhash3_x86_32)
     PHP_FE(murmurhash3_x86_128, arginfo_murmurhash3_x86_128)
     PHP_FE(murmurhash3_x64_128, arginfo_murmurhash3_x64_128)
@@ -349,6 +350,23 @@ PHP_FUNCTION(murmurhash_neutral2)
     }
 
     output = MurmurHashNeutral2(key, key_len, seed);
+    //printf("%s, %d, %d, %llu\n", key, key_len, seed, (uint64_t)output);
+
+    RETURN_LONG(output);
+}
+
+PHP_FUNCTION(murmurhash_aligned2)
+{
+    char *key = NULL;
+    size_t key_len = 0;
+    long seed = 0;
+    uint64_t output;
+
+    if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|l", &key, &key_len, &seed) == FAILURE) {
+        RETURN_NULL();
+    }
+
+    output = MurmurHashAligned2(key, key_len, seed);
     //printf("%s, %d, %d, %llu\n", key, key_len, seed, (uint64_t)output);
 
     RETURN_LONG(output);
