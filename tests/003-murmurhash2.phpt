@@ -17,8 +17,20 @@ echo $output."\n";
 $output = murmurhash64b($input, $seed);
 echo $output."\n";
 
+$output = murmurhash2a($input, $seed);
+echo $output."\n";
+
+$output = murmurhash_neutral2($input, $seed);
+echo $output."\n";
+
+$output = murmurhash_aligned2($input, $seed);
+echo $output."\n";
+
 ?>
 --EXPECT--
 1532637697
 -3870603097106057174
 7448014171559636702
+2221687037
+1532637697
+1532637697
