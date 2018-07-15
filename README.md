@@ -14,15 +14,21 @@ Install
 ```sh
 $ /path/to/phpize
 $ ./configure --with-php-config=/path/to/php-config
-$ make && make install
+$ make 
+$ make test
+$ make install
 ```
 
 PHP function
 ------------
 * [murmurhash1](#murmurhash1)
+* [murmurhash1_aligned](#murmurhash1_aligned)
 * [murmurhash2](#murmurhash2)
 * [murmurhash64a](#murmurhash64a)
 * [murmurhash64b](#murmurhash64b)
+* [murmurhash2a](#murmurhash2a)
+* [murmurhash_neutral2](#murmurhash_neutral2)
+* [murmurhash_aligned2](#murmurhash_aligned2)
 * [murmurhash3_x86_32](#murmurhash3_x86_32)
 * [murmurhash3_x86_128](#murmurhash3_x86_128)
 * [murmurhash3_x64_128](#murmurhash3_x64_128)
@@ -30,6 +36,10 @@ PHP function
 murmurhash1
 -----------
 * **function** `int murmurhash1(string name, int seed)`
+
+murmurhash1_aligned
+-------------------
+* **function** `int murmurhash1_aligned(string name, int seed)`
 
 murmurhash2
 -----------
@@ -42,6 +52,18 @@ murmurhash64a
 murmurhash64b
 -----------
 * **function** `int murmurhash64b(string name, int seed)`
+
+murmurhash2a
+------------
+* **function** `int murmurhash2a(string name, int seed)`
+
+murmurhash_neutral2
+-------------------
+* **function** `int murmurhash_neutral2(string name, int seed)`
+
+murmurhash_aligned2
+-------------------
+* **function** `int murmurhash_aligned2(string name, int seed)`
 
 murmurhash3_x86_32
 -----------
